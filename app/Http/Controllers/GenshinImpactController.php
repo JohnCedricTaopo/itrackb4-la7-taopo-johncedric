@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 class GenshinImpactController extends Controller
 {
 
+
+//keeps all activity data in one place.
     private function characters(): array
     {
         return [
