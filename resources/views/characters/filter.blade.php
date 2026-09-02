@@ -7,7 +7,7 @@
 </head>
 <body>
     @if ($element )
-        <p>John Cedric P. Taopo | 2023-70351</p>
+    <p>John Cedric P. Taopo | 2023-70351</p>
         <h1>Characters with {{ $element }} element</h1>
         <p>Only characters matching this element are shown.</p>
     @else
