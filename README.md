@@ -1,0 +1,15 @@
+Question
+Q1. Explain the order you placed your featured route and your detail route in, and what would happen if you swapped them.
+
+I placed my featured route before my detail route because the detail route uses {id}, which can also match the word featured. If I switched their order, Laravel might treat featured as an id and open the wrong method instead of showing my featured page.
+
+
+Q2. What happens when someone visits an id that does not exist in your data, and what did you write to make that happen?
+
+
+When a visitor enters an id that is not included in my data, the website displays a 404 error page. I made this happen by checking the id with isset() and using abort(404) when no matching item was found.
+
+
+Q3. Why do your links use route names instead of typed URLs? Give one concrete thing that would break if they did not.
+
+I used named routes so I do not have to repeat URLs in all my Blade files. If I typed the URL manually and later renamed the list route, the old link would still point to the previous address and would no longer work.
