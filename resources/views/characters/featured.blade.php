@@ -1,31 +1,41 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <p>John Cedric P. Taopo | 2023-70351</p>
-    <title>Featured Character</title>
-</head>
-<body>
-    <h1>Featured Character</h1>
+@extends('layouts.app')
 
-    <h2>{{ $character['name'] }}</h2>
+@section('title', 'Featured Character')
 
-    <p><strong>ID:</strong> {{ $character['id'] }}</p>
-    <p><strong>Character Name:</strong> {{ $character['name'] }}</p>
-    <p><strong>Element:</strong> {{ $character['element'] }}</p>
-    <p><strong>Weapon:</strong> {{ $character['weapon'] }}</p>
-    <p><strong>Rarity:</strong> {{ $character['rarity'] }}-Star</p>
+@section('content')
+    <div class="card border-warning shadow-sm">
+        <div class="card-header bg-warning-subtle">
+            Featured character
+        </div>
 
+        <div class="card-body">
+            <h2 class="card-title">{{ $character['name'] }}</h2>
+            <p class="card-text">
+                This character was selected as the featured record for the archive.
+            </p>
 
-    <a href="{{ route('characters.show', $character['id']) }}">
-        View full detail
-    </a>
+            <ul class="list-group list-group-flush mb-4">
+                <li class="list-group-item">
+                    <strong>ID:</strong> {{ $character['id'] }}
+                </li>
+                <li class="list-group-item">
+                    <strong>Element:</strong> {{ $character['element'] }}
+                </li>
+                <li class="list-group-item">
+                    <strong>Weapon:</strong> {{ $character['weapon'] }}
+                </li>
+                <li class="list-group-item">
+                    <strong>Rarity:</strong> {{ $character['rarity'] }}-Star
+                </li>
+            </ul>
 
-    <a href="{{ route('characters.index') }}">
-        Back to the list
-    </a>
-</body>
-</html>
+            <a class="btn btn-warning" href="{{ route('characters.show', $character['id']) }}">
+                Open full detail
+            </a>
 
-
+            <a class="btn btn-outline-secondary" href="{{ route('characters.index') }}">
+                Back to archive
+            </a>
+        </div>
+    </div>
+@endsection

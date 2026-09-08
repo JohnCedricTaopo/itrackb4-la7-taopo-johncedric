@@ -1,52 +1,64 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Filtered Characters</title>
-</head>
-<body>
-    @if ($element )
-    <p>John Cedric P. Taopo | 2023-70351</p>
-        <h1>Characters with {{ $element }} element</h1>
-        <p>Only characters matching this element are shown.</p>
-    @else
-        <p>John Cedric P. Taopo | 2023-70351</p>
-        <h1>All Characters</h1>
-        <p>No filter value was supplied, so all characters are shown.</p>
-    @endif
+@extends('layouts.app')
 
-    @if (count($characters) > 0)
-        <table border="1" cellpadding="8">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Character Name</th>
-                    <th>Element</th>
-                    <th>Weapon</th>
-                    <th>Rarity</th>
+@section('title', $element ? $element . ' Characters' : 'All Elements')
 
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($characters as $character)
-                    <tr>
-                        <td>{{ $character['id'] }}</td>
-                        <td>
-                            <a href="{{ route('characters.show', $character['id']) }}">
-                                {{ $character['name'] }}
-                            </a>
-                        </td>
-                        <td>{{ $character['element'] }}</td>
-                        <td>{{ $character['weapon'] }}</td>
-                        <td>{{ $character['rarity']}}-Star</td>
-                    </tr>
-                @endforeach
-            </tbody>
-        </table>
-    @else
-        <p>No characters match the selected value.</p>
-    @endif
+@section('content')
+    <div class="card shadow-sm">
+        <div class="card-body">
+            @if ($element)
+                <h2>Characters with the {{ $element }} element</h2>
+                <p class="text-muted">
+                    The archive is filtered to records matching your selected element.
+                </p>
+            @else
+                <h2>Characters from all elements</h2>
+                <p class="text-muted">
+                    No element was selected, so every character is displayed.
+                </p>
+            @endif
 
-</body>
-</html>
+            <div class="table-responsive">
+                <table class="table table-striped table-bordered align-middle">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>ID</th>
+                            <th>Character Name</th>
+                            <th>Element</th>
+                            <th>Weapon</th>
+                            <th>Rarity</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @forelse ($characters as $character)
+                            <tr>
+                                <td>{{ $character['id'] }}</td>
+                                <td>
+                                    <a href="{{ route('characters.show', $character['id']) }}">
+                                        {{ $character['name'] }}
+                                    </a>
+                                </td>
+                                <td>{{ $character['element'] }}</td>
+                                <td>{{ $character['weapon'] }}</td>
+                                <td>{{ $character['rarity'] }}-Star</td>
+                            </tr>
+                        @empty
+                            <tr>
+                                <td colspan="5" class="text-center text-muted py-4">
+                                    No characters match “{{ $element }}”. Try another element.
+                                </td>
+                            </tr>
+                        @endforelse
+                    </tbody>
+                </table>
+            </div>
+
+            <a class="btn btn-success" href="{{ route('characters.filter') }}">
+                Show all elements
+            </a>
+
+            <a class="btn btn-outline-primary" href="{{ route('characters.index') }}">
+                Back to archive
+            </a>
+        </div>
+    </div>
+@endsection

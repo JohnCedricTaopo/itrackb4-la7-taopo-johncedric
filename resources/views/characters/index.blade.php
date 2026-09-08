@@ -1,40 +1,44 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Genshin Impact Characters</title>
-</head>
-<body>
-    <h1>Genshin Impact Characters</h1>
+@extends('layouts.app')
 
-    <p>John Cedric P. Taopo | 2023-70351</p>
+@section('title', 'All Characters')
 
-    <table border="1" cellpadding="8">
-        <thead>
+@section('content')
+    <table class="table table-striped table-primary" border="1" cellpadding="8">
+        <tr>
+            <th>No.</th>
+            <th>Name</th>
+            <th>Element</th>
+            <th>Weapon</th>
+            <th>Rarity</th>
+        </tr>
+
+        @forelse ($characters as $character)
             <tr>
-                <th>ID</th>
-                <th>Character Name</th>
-                <th>Element</th>
-                <th>Weapon</th>
-                <th>Rarity</th>
+                <td>{{ $loop->iteration }}</td>
+
+                <td>
+                    <a href="{{ route('characters.show', $character['id']) }}">
+                        {{ $character['name'] }}
+                    </a>
+                </td>
+
+                <td>{{ $character['element'] }}</td>
+                <td>{{ $character['weapon'] }}</td>
+
+                <td>
+                    @if ($character['rarity'] >= 5)
+                        <p class="text-warning fw-bold">5-Star Character</p>
+                    @else
+                        <p class="text-secondary">{{ $character['rarity'] }}-Star Character</p>
+                    @endif
+                </td>
             </tr>
-        </thead>
-        <tbody>
-            @foreach ($characters as $character)
-                <tr>
-                    <td>{{ $character['id'] }}</td>
-                    <td>
-                        <a href="{{ route('characters.show', $character['id']) }}">
-                            {{ $character['name'] }}
-                        </a>
-                    </td>
-                    <td>{{ $character['element'] }}</td>
-                    <td>{{ $character['weapon'] }}</td>
-                    <td>{{ $character['rarity'] }}-Star</td>
-                </tr>
-            @endforeach
-        </tbody>
+        @empty
+            <tr>
+                <td colspan="5">
+                    <b>No Character Found</b>
+                </td>
+            </tr>
+        @endforelse
     </table>
-</body>
-</html>
+@endsection

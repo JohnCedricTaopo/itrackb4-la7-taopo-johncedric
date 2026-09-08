@@ -1,23 +1,56 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <p>John Cedric P. Taopo | 2023-70351</p>
-    <title>{{ $character['name'] }} Details</title>
-</head>
-<body>
-    <h1>{{ $character['name'] }}</h1>
+@extends('layouts.app')
 
-    <p><strong>ID:</strong> {{ $character['id'] }}</p>
-    <p><strong>Character Name:</strong> {{ $character['name'] }}</p>
-    <p><strong>Element:</strong> {{ $character['element'] }}</p>
-    <p><strong>Weapon:</strong> {{ $character['weapon'] }}</p>
-    <p><strong>Rarity:</strong> {{ $character['rarity'] }}-Star</p>
+@section('title', $character['name'] . ' Details')
 
+@section('content')
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <p class="text-uppercase text-primary fw-semibold small mb-1">
+                Character detail
+            </p>
 
-    <a href="{{ route('characters.index' ) }}">
-        Back to the list
-    </a>
-</body>
-</html>
+            <h2 class="card-title">{{ $character['name'] }}</h2>
+            <p class="card-text text-muted">
+                Complete information for character ID {{ $character['id'] }}.
+            </p>
+
+            <div class="row g-3 mb-4">
+                <div class="col-md-4">
+                    <div class="border rounded p-3 h-100">
+                        <small class="text-muted d-block">ID</small>
+                        <strong>{{ $character['id'] }}</strong>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="border rounded p-3 h-100">
+                        <small class="text-muted d-block">Element</small>
+                        <strong>{{ $character['element'] }}</strong>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="border rounded p-3 h-100">
+                        <small class="text-muted d-block">Weapon</small>
+                        <strong>{{ $character['weapon'] }}</strong>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="border rounded p-3 h-100">
+                        <small class="text-muted d-block">Rarity</small>
+                        <strong>{{ $character['rarity'] }}-Star</strong>
+                    </div>
+                </div>
+            </div>
+
+            <a class="btn btn-primary" href="{{ route('characters.index') }}">
+                Back to all characters
+            </a>
+
+            <a class="btn btn-outline-secondary" href="{{ route('characters.featured') }}">
+                Featured page
+            </a>
+        </div>
+    </div>
+@endsection
