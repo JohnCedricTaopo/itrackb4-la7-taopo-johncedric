@@ -13,3 +13,8 @@ When a visitor enters an id that is not included in my data, the website display
 Q3. Why do your links use route names instead of typed URLs? Give one concrete thing that would break if they did not.
 
 I used named routes so I do not have to repeat URLs in all my Blade files. If I typed the URL manually and later renamed the list route, the old link would still point to the previous address and would no longer work.
+## Lab Activity 4 Notes
+
+This activity uses one shared Blade layout for the project pages. The layout contains the common HTML structure, Bootstrap stylesheet, navigation, site heading, and student name. The individual pages extend the layout and fill the title and content sections.
+
+The list page uses @forelse to show the characters or an empty message, @if to display different rarity styles, and $loop->iteration to number the rows.
