@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
+
 class GenshinImpactController extends Controller
 {
 
-
-//keeps all activity data in one place.
     private function characters(): array
     {
         return [
@@ -26,6 +26,16 @@ class GenshinImpactController extends Controller
         ]);
     }
 
+    public function create()
+    {
+        // Not implemented yet.
+    }
+
+    public function store(Request $request)
+    {
+        // Not implemented yet.
+    }
+
     public function show(int $id)
     {
         $characters = $this->characters();
@@ -37,6 +47,21 @@ class GenshinImpactController extends Controller
         return view('characters.show', [
             'character' => $characters[$id],
         ]);
+    }
+
+    public function edit(int $id)
+    {
+        // Not implemented yet.
+    }
+
+    public function update(Request $request, int $id)
+    {
+        // Not implemented yet.
+    }
+
+    public function destroy(int $id)
+    {
+        // Not implemented yet.
     }
 
     public function featured()
@@ -55,7 +80,8 @@ class GenshinImpactController extends Controller
         if ($element !== null && $element !== '') {
             $characters = array_filter(
                 $characters,
-                fn (array $character): bool => strcasecmp($character['element'], $element) === 0
+                fn (array $character): bool =>
+                    strcasecmp($character['element'], $element) === 0
             );
         }
 
@@ -64,4 +90,5 @@ class GenshinImpactController extends Controller
             'element' => $element,
         ]);
     }
+
 }
