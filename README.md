@@ -18,3 +18,9 @@ I used named routes so I do not have to repeat URLs in all my Blade files. If I 
 This activity uses one shared Blade layout for the project pages. The layout contains the common HTML structure, Bootstrap stylesheet, navigation, site heading, and student name. The individual pages extend the layout and fill the title and content sections.
 
 The list page uses @forelse to show the characters or an empty message, @if to display different rarity styles, and $loop->iteration to number the rows.
+
+## Lab Activity 5 Notes
+
+This activity reorganized the project into a resource controller. The controller contains the seven conventional Laravel action names, while the working list and detail behavior remain in index and show. The featured and filter actions remain as separate custom methods.
+
+The routes use one resource line. The line is restricted to index and show because the other five resource methods are not implemented yet. The custom featured and filter routes are written above the resource route so they are not treated as character ids.
