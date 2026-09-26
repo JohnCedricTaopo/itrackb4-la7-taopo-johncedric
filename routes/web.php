@@ -8,11 +8,18 @@ Route::get('/whoami', function () {
     return 'John Cedric P. Taopo | 2023-70351 | Block 4C | ITRACKB4 Laravel 12';
 });
 
+Route::get('/characters/filter/{element?}', function (?string $element = null) {
+    if ($element === null || $element === '') {
+        return redirect()->route('characters.index');
+    }
+
+    return redirect()->route('characters.index', [
+        'element' => $element,
+    ]);
+})->name('characters.filter');
+
 Route::get('/characters/featured', [GenshinImpactController::class, 'featured'])
     ->name('characters.featured');
-
-Route::get('/characters/filter/{element?}', [GenshinImpactController::class, 'filter'])
-    ->name('characters.filter');
 
 Route::resource('characters', GenshinImpactController::class)
     ->only(['index', 'show'])

@@ -19,10 +19,33 @@ class GenshinImpactController extends Controller
         ];
     }
 
-    public function index()
+    public function index(Request $request)
     {
+        $characters = $this->characters();
+
+        $element = $request->query('element', 'all');
+        $rarity = $request->query('rarity', 'all');
+
+        if ($element !== 'all' && $element !== '') {
+            $characters = array_filter(
+                $characters,
+                fn (array $character): bool =>
+                    strcasecmp($character['element'], $element) === 0
+            );
+        }
+
+        if ($rarity !== 'all' && $rarity !== '') {
+            $characters = array_filter(
+                $characters,
+                fn (array $character): bool =>
+                    (string) $character['rarity'] === (string) $rarity
+            );
+        }
+
         return view('characters.index', [
-            'characters' => $this->characters(),
+            'characters' => $characters,
+            'element' => $element,
+            'rarity' => $rarity,
         ]);
     }
 
@@ -70,24 +93,6 @@ class GenshinImpactController extends Controller
 
         return view('characters.featured', [
             'character' => $characters[4],
-        ]);
-    }
-
-    public function filter(?string $element = null)
-    {
-        $characters = $this->characters();
-
-        if ($element !== null && $element !== '') {
-            $characters = array_filter(
-                $characters,
-                fn (array $character): bool =>
-                    strcasecmp($character['element'], $element) === 0
-            );
-        }
-
-        return view('characters.filter', [
-            'characters' => $characters,
-            'element' => $element,
         ]);
     }
 
