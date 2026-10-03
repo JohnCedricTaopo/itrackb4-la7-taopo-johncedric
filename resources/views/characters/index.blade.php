@@ -61,6 +61,7 @@
             </div>
 
             <div class="mb-3">
+                <a class="btn btn-success" href="{{ route('characters.create') }}">Add character</a>
                 <a class="btn btn-success btn-sm" href="{{ route('characters.index') }}">
                     Clear both filters
                 </a>

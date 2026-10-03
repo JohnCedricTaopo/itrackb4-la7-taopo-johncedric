@@ -9,14 +9,19 @@ class GenshinImpactController extends Controller
 
     private function characters(): array
     {
-        return [
-            1 => ['id' => 1, 'name' => 'Traveler', 'element' => 'Anemo', 'weapon' => 'Sword', 'rarity' => 5,],
-            2 => ['id' => 2, 'name' => 'Odette', 'element' => 'Cryo', 'weapon' => 'Sword', 'rarity' => 5,],
-            3 => ['id' => 3, 'name' => 'Sandrone', 'element' => 'Cryo', 'weapon' => 'Claymore', 'rarity' => 5,],
-            4 => ['id' => 4, 'name' => 'Raiden Shogun', 'element' => 'Electro', 'weapon' => 'Polearm', 'rarity' => 5,],
-            5 => ['id' => 5, 'name' => 'Ineffa', 'element' => 'Electro', 'weapon' => 'Polearm', 'rarity' => 5,],
-            6 => ['id' => 6, 'name' => 'Bennett', 'element' => 'Pyro', 'weapon' => 'Sword', 'rarity' => 4,],
-        ];
+        $path = storage_path('app/characters.json');
+
+        return json_decode(file_get_contents($path), true);
+    }
+
+    private function saveCharacters(array $characters): void
+    {
+        $path = storage_path('app/characters.json');
+
+        file_put_contents(
+            $path,
+            json_encode($characters, JSON_PRETTY_PRINT)
+        );
     }
 
     public function index(Request $request)
@@ -51,12 +56,35 @@ class GenshinImpactController extends Controller
 
     public function create()
     {
-        // Not implemented yet.
+        return view('characters.create');
     }
 
     public function store(Request $request)
     {
-        // Not implemented yet.
+        $validated = $request->validate([
+            'name' => 'required|max:100',
+            'element' => 'required|in:Anemo,Cryo,Electro,Pyro,Dendro,Hydro',
+            'weapon' => 'required|in:Sword,Claymore,Polearm,Catalyst,Bow',
+            'rarity' => 'required|numeric|in:4,5',
+        ]);
+
+        $characters = $this->characters();
+
+        $nextId = max(array_keys($characters)) + 1;
+
+        $characters[$nextId] = [
+            'id' => $nextId,
+            'name' => $validated['name'],
+            'element' => $validated['element'],
+            'weapon' => $validated['weapon'],
+            'rarity' => (int) $validated['rarity'],
+        ];
+
+        $this->saveCharacters($characters);
+
+        return redirect()
+            ->route('characters.index')
+            ->with('success', 'Character added successfully.');
     }
 
     public function show(int $id)

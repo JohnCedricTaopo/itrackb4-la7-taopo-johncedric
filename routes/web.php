@@ -22,5 +22,5 @@ Route::get('/characters/featured', [GenshinImpactController::class, 'featured'])
     ->name('characters.featured');
 
 Route::resource('characters', GenshinImpactController::class)
-    ->only(['index', 'show'])
+    ->only(['index', 'show', 'create', 'store'])
     ->whereNumber('character');

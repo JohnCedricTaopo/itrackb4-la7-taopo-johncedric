@@ -1,0 +1,65 @@
+{
+    "1": {
+        "id": 1,
+        "name": "Traveler",
+        "element": "Anemo",
+        "weapon": "Sword",
+        "rarity": 5
+    },
+    "2": {
+        "id": 2,
+        "name": "Odette",
+        "element": "Cryo",
+        "weapon": "Sword",
+        "rarity": 5
+    },
+    "3": {
+        "id": 3,
+        "name": "Sandrone",
+        "element": "Cryo",
+        "weapon": "Claymore",
+        "rarity": 5
+    },
+    "4": {
+        "id": 4,
+        "name": "Raiden Shogun",
+        "element": "Electro",
+        "weapon": "Polearm",
+        "rarity": 5
+    },
+    "5": {
+        "id": 5,
+        "name": "Ineffa",
+        "element": "Electro",
+        "weapon": "Polearm",
+        "rarity": 5
+    },
+    "6": {
+        "id": 6,
+        "name": "Bennett",
+        "element": "Pyro",
+        "weapon": "Sword",
+        "rarity": 4
+    },
+    "7": {
+        "id": 7,
+        "name": "Nahida",
+        "element": "Dendro",
+        "weapon": "Catalyst",
+        "rarity": 5
+    },
+    "8": {
+        "id": 8,
+        "name": "Xingqiu",
+        "element": "Hydro",
+        "weapon": "Sword",
+        "rarity": 4
+    },
+    "9": {
+        "id": 9,
+        "name": "Furina",
+        "element": "Hydro",
+        "weapon": "Sword",
+        "rarity": 5
+    }
+}
